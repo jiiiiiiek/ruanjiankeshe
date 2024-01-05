@@ -350,4 +350,7 @@ export default{
 .mychartall{
   margin-top: 20px;
 }
+.input{
+  margin-top: 20px;
+}
 </style>

@@ -18,7 +18,8 @@
 
     <el-card class="box-card">
     <div type="情感分型柱状图" class="text item">{{ '情感分析柱状图' }}</div>
-    <div class="echart" id="mychart" :style="myChartStyle"></div>
+    <el-empty description="还没有数据..." v-show="isDataLoaded==false" />
+    <div class="echart" v-show="isDataLoaded==true" id="mychart" :style="myChartStyle"></div>
   </el-card>
 </template>
 
@@ -35,7 +36,8 @@ import { Loading } from "element-plus/es/components/loading/src/service";
         xData: ["感动","震惊","搞笑","悲伤","新奇","愤怒"], //横坐标
         yData: [], //数据
         fullscreenLoading:false,
-        myChartStyle: { double: "left", width: "100%", height: "400px" } //图表样式
+        myChartStyle: { double: "left", width: "100%", height: "400px" }, //图表样式
+        isDataLoaded:false
       };
     },
     mounted() {
@@ -71,7 +73,7 @@ import { Loading } from "element-plus/es/components/loading/src/service";
       toFilterData(){
             if(this.input == '') {
              return
-        } else {
+        } else {this.isDataLoaded=true;
           this.fullscreenLoading=true;
             Axios.post("http://localhost:8081/AnaContent",JSON.stringify({"content":this.input}),{
               headers:{
@@ -109,5 +111,9 @@ import { Loading } from "element-plus/es/components/loading/src/service";
   width: 480px;
   margin-top: 20px;
   margin-left: 33%;
+}
+
+.input{
+  margin-top: 20px;
 }
 </style>

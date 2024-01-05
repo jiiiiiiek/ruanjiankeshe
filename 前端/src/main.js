@@ -5,6 +5,7 @@ import 'element-plus/dist/index.css'
 import Echarts from 'echarts'
 
 
+
 const app = createApp(App)
 
 app.use(ElementPlus)
